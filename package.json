@@ -9,13 +9,13 @@
     "lint": "eslint --fix --ext .ts @types bot commands"
   },
   "dependencies": {
-    "@chookslint/eslint-config-typescript": "^2.2.1",
     "canvas": "^2.9.0",
-    "chooksie": "^2.0.0-rc.5",
+    "chooksie": "^2.0.0",
     "discord.js": "^13.6.0"
   },
   "devDependencies": {
-    "@chookscord/cli": "^2.0.0-rc.10",
+    "@chookscord/cli": "^2.0.0",
+    "@chookslint/eslint-config-typescript": "^2.2.1",
     "@types/node": "^16.11.26",
     "@typescript-eslint/eslint-plugin": "^5.13.0",
     "@typescript-eslint/parser": "^5.13.0",
