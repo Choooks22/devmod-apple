@@ -1,8 +1,8 @@
-import { Command } from '@types'
+import type { Command } from '@types'
 
 import config from '../../config'
 
-import {
+import type {
   TextChannel,
 } from 'discord.js'
 
@@ -16,9 +16,9 @@ const mute: Command = {
   description: 'Mutes a user.',
   permissions: ['MANAGE_MESSAGES'],
 
-  async callback ({ 
-    message, 
-    embed, 
+  async callback({
+    message,
+    embed,
     args,
   }): Promise<void> {
     if (!config.roles?.muted) {
@@ -31,7 +31,7 @@ const mute: Command = {
     }
 
     const [userId, ...restArgs] = args
-    
+
     const snowflake = userId.replace(/<@!?([0-9]+)>/, '$1')
     const reason = restArgs.join(' ')
     const member = await message.guild.members.fetch(snowflake)
@@ -40,7 +40,7 @@ const mute: Command = {
 
     const reasonString = reason
       ? ` for ${reason}.`
-      : `.`
+      : '.'
 
     message.delete().catch(console.error)
 
@@ -54,9 +54,9 @@ const mute: Command = {
       await logChannel.send(embed({
         title: 'Mute',
         description: `<@${user.id}> has been muted${reasonString}`,
-        
+
         footer: {
-          "icon_url": user.avatarURL(),
+          icon_url: user.avatarURL(),
           text: name,
         },
       }))
@@ -64,9 +64,9 @@ const mute: Command = {
       await message.channel.send(embed({
         title: 'Failed to mute member.',
         color: red,
-        
+
         footer: {
-          "icon_url": user.avatarURL(),
+          icon_url: user.avatarURL(),
           text: name,
         },
       }))

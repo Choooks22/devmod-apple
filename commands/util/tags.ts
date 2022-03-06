@@ -1,11 +1,11 @@
-import { Command } from '@types'
+import type { Command } from '@types'
 
 import { tags } from './tagsList'
 
 const tagDescription = Object.entries(tags)
   .map(([key, props]) => {
-    return props['title']
-      ? `\`${key}\` - ${props['title']}`
+    return props.title
+      ? `\`${key}\` - ${props.title}`
       : `\`${key}\``
   })
   .join('\n')
@@ -18,7 +18,7 @@ const tagsCommand: Command = {
   usage: 'tags',
   description: 'List all available tags.',
 
-  async callback ({ message, embed }): Promise<void> {
+  async callback({ message, embed }): Promise<void> {
     await message.channel.send(embed({
       title: 'Tags',
       description: tagDescription,

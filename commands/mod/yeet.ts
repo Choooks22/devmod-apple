@@ -1,7 +1,7 @@
-import { Command } from '@types'
+import type { Command } from '@types'
 import config from '../../config'
 import { red } from '../../utils/colors'
-import { TextChannel } from 'discord.js'
+import type { TextChannel } from 'discord.js'
 
 const yeetGifIds = [
   'J1ABRhlfvQNwIOiAas',
@@ -19,18 +19,18 @@ const yeet: Command = {
   regex: /^(yeet|ban)(\s|$)/,
   usage: 'yeet <member> <reason>',
   description: 'Bans a member.',
-  permissions: ["BAN_MEMBERS"],
+  permissions: ['BAN_MEMBERS'],
 
-  async callback ({ 
-    message, 
-    args, 
-    embed, 
+  async callback({
+    message,
+    args,
+    embed,
     client,
   }): Promise<void> {
     if (args.length < 1) {
-      await message.channel.send('https://media.giphy.com/media/' + yeetGifIds[Math.floor(Math.random() * yeetGifIds.length)] + '/giphy.gif')
-      
-      return 
+      await message.channel.send(`https://media.giphy.com/media/${yeetGifIds[Math.floor(Math.random() * yeetGifIds.length)]}/giphy.gif`)
+
+      return
     }
 
     const [userId, ...restArgs] = args
@@ -47,9 +47,9 @@ const yeet: Command = {
         await message.channel.send(embed({
           title: 'This member is unbannable.',
           color: red,
-          
+
           footer: {
-            "icon_url": user.avatarURL(),
+            icon_url: user.avatarURL(),
             text: name,
           },
         }))
@@ -62,12 +62,12 @@ const yeet: Command = {
 
     const reasonString = reason
       ? ` for ${reason}.`
-      : `.`
+      : '.'
 
     message.delete().catch(console.error)
 
     await user.send(embed({
-      title: `Yeeted`,
+      title: 'Yeeted',
       description: `You've been yeeted from Devcord${reasonString}`,
     })).catch(console.error)
 
@@ -83,9 +83,9 @@ const yeet: Command = {
       await logChannel.send(embed({
         title: 'Yeet',
         description: `<@${user.id}> has been yeeted${reasonString}`,
-        
+
         footer: {
-          "icon_url": user.avatarURL(),
+          icon_url: user.avatarURL(),
           text: name,
         },
       }))
@@ -93,9 +93,9 @@ const yeet: Command = {
       await message.channel.send(embed({
         title: 'Failed to yeet member.',
         color: red,
-        
+
         footer: {
-          "icon_url": user.avatarURL(),
+          icon_url: user.avatarURL(),
           text: name,
         },
       }))

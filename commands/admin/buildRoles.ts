@@ -1,10 +1,10 @@
-import { Command } from '@types'
+import type { Command } from '@types'
 
 import config from '../../config'
 
 import { red } from '../../utils/colors'
 
-import {
+import type {
   TextChannel,
 } from 'discord.js'
 
@@ -16,7 +16,7 @@ const buildRoles: Command = {
 
   // TODO: categorize assignable roles and split embeds manually
 
-  async callback ({
+  async callback({
     message,
     embed,
   }): Promise<void> {

@@ -1,8 +1,8 @@
-import { Command } from '@types'
+import type { Command } from '@types'
 
 import config from '../../config'
 
-import {
+import type {
   TextChannel,
 } from 'discord.js'
 
@@ -16,13 +16,13 @@ const mute: Command = {
   description: 'Sends a user a warning message.',
   permissions: ['MANAGE_MESSAGES'],
 
-  async callback ({ 
-    message, 
-    embed, 
+  async callback({
+    message,
+    embed,
     args,
   }): Promise<void> {
     const [userId, ...restArgs] = args
-    
+
     const snowflake = userId.replace(/<@!?([0-9]+)>/, '$1')
     const reason = restArgs.join(' ')
     const member = await message.guild.members.fetch(snowflake)
@@ -53,9 +53,9 @@ const mute: Command = {
       await logChannel.send(embed({
         title: 'Warning',
         description: `<@${user.id}> has been warned: ${reason}`,
-        
+
         footer: {
-          "icon_url": user.avatarURL(),
+          icon_url: user.avatarURL(),
           text: name,
         },
       }))
@@ -63,9 +63,9 @@ const mute: Command = {
       await message.channel.send(embed({
         title: 'Failed to warn member.',
         color: red,
-        
+
         footer: {
-          "icon_url": user.avatarURL(),
+          icon_url: user.avatarURL(),
           text: name,
         },
       }))

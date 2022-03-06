@@ -1,5 +1,5 @@
-import { Command } from '@types'
-import { TextChannel } from 'discord.js'
+import type { Command } from '@types'
+import type { TextChannel } from 'discord.js'
 
 const prune: Command = {
   regex: /^prune\s/,
@@ -7,7 +7,7 @@ const prune: Command = {
   description: 'Removes up to 100 messages.',
   permissions: ['MANAGE_MESSAGES'],
 
-  async callback ({
+  async callback({
     message,
     args,
   }) {

@@ -1,2 +1,2 @@
-export { Command } from './Command'
-export { Config } from './Config'
+export type { Command } from './Command'
+export type { Config } from './Config'

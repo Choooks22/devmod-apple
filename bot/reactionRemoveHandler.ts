@@ -1,4 +1,4 @@
-import {
+import type {
   MessageReaction,
   GuildMember,
 } from 'discord.js'

@@ -1,4 +1,4 @@
-import { Command } from '@types'
+import type { Command } from '@types'
 
 import commands from '../'
 
@@ -7,7 +7,7 @@ const help: Command = {
   usage: 'help',
   description: 'Get a list of commands.',
 
-  async callback ({ message, embed }): Promise<void> {
+  async callback({ message, embed }): Promise<void> {
     await message.channel.send(embed({
       title: 'Help',
       description: commands

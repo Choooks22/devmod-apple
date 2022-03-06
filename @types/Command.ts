@@ -1,5 +1,5 @@
-import {
-  Message, 
+import type {
+  Message,
   Client,
   BitFieldResolvable,
   PermissionString,
@@ -12,12 +12,12 @@ export interface Command {
   noPrefix?: boolean
   permissions?: BitFieldResolvable<PermissionString>
 
-  callback (props: {
+  callback: (props: {
     message: Message
     content: string
     contentWithCommand: string
     args: string[]
-    embed (props, messageProps?): Record<string, unknown>
+    embed: (props, messageProps?) => Record<string, unknown>
     client: Client
-  }): void | Promise<void>
+  }) => void | Promise<void>
 }

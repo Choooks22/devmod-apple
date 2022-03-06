@@ -1,4 +1,4 @@
-import { Command } from '@types'
+import type { Command } from '@types'
 import { red } from '../../utils/colors'
 import { tags } from './tagsList'
 

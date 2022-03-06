@@ -1,4 +1,4 @@
-import { Command } from '@types'
+import type { Command } from '@types'
 
 import config from '../../config'
 import { red } from '../../utils/colors'
@@ -8,7 +8,7 @@ const pingable: Command = {
   usage: 'pingable',
   description: 'List all pingable roles.',
 
-  async callback ({ message, embed }) {
+  async callback({ message, embed }) {
     if (!config.roles?.pingable) {
       await message.channel.send(embed({
         title: 'Pingable roles aren\'t configured.',

@@ -1,4 +1,4 @@
-import { Command } from '@types'
+import type { Command } from '@types'
 
 import config from '../../config'
 import { red } from '../../utils/colors'
@@ -10,8 +10,8 @@ const helpPing: Command = {
   usage: 'ping <role>',
   description: 'Ping one of the help roles (without the `help-` prefix). You can ping help roles to notify helpers about your question. You may only ping once per hour, and twice daily.',
 
-  async callback ({ 
-    message, 
+  async callback({
+    message,
     args,
     embed,
   }) {
@@ -58,7 +58,7 @@ const helpPing: Command = {
 
     if (hourlyPings.length >= 1) {
       await message.channel.send(embed({
-        title: `You may only ping once an hour.`,
+        title: 'You may only ping once an hour.',
         color: red,
       }))
 
@@ -67,7 +67,7 @@ const helpPing: Command = {
 
     if (dailyPings.length >= 2) {
       await message.channel.send(embed({
-        title: `You may only ping twice a day.`,
+        title: 'You may only ping twice a day.',
         color: red,
       }))
 

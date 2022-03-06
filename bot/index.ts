@@ -1,6 +1,6 @@
+import type { TextChannel } from 'discord.js'
 import {
   Client,
-  TextChannel,
 } from 'discord.js'
 
 import MessageHandler from './messageHandler'

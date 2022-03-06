@@ -15,7 +15,7 @@ export const tags = {
       'DevOps is a way of working to combine joint effort form Development and Operations teams (hence Dev - Ops.)',
       'It is commonly associated with cloud native technologies such as Kubernetes, Containers, and CI/CD practices et al.\n',
       '[Martin Fowler\'s DevOps Culture](https://www.martinfowler.com/bliki/DevOpsCulture.html)',
-    ].join('\n')
+    ].join('\n'),
   },
   oss: {
     title: 'First Time Contributors',
@@ -69,7 +69,7 @@ export const tags = {
       'Build an Interpreter',
       'Weather App',
       'Tetris',
-    ].map(idea => '- ' + idea).join('\n'),
+    ].map(idea => `- ${idea}`).join('\n'),
   },
   jobs: {
     title: 'Jobs',
@@ -126,7 +126,7 @@ export const tags = {
         name: 'https://codepen.io - Great for beginners',
       }, {
         name: 'https://jsfiddle.net - Similar to codepen',
-      }
+      },
     ],
   },
   roadmap: {
@@ -439,8 +439,8 @@ export const tags = {
     color: orange,
     title: 'Did someone say Rust?',
     image: { url: 'https://i.imgur.com/mczIGZK.jpg' },
-  }, 
-  donodohurtonme : {
+  },
+  donodohurtonme: {
     color: red,
     title: 'DO NO DO HURT ON ME',
     image: { url: 'https://i.imgur.com/yJ8h0KY.png' },

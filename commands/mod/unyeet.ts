@@ -1,7 +1,7 @@
-import { Command } from '@types'
+import type { Command } from '@types'
 import config from '../../config'
 import { red } from '../../utils/colors'
-import { 
+import type {
   TextChannel,
 } from 'discord.js'
 // import { channels.log } from '@config'
@@ -12,14 +12,14 @@ const unyeet: Command = {
   description: 'Unbans a member.',
   permissions: ['BAN_MEMBERS'],
 
-  async callback ({ 
-    message, 
-    client, 
-    args, 
-    embed, 
+  async callback({
+    message,
+    client,
+    args,
+    embed,
   }): Promise<void> {
     const [userId, ...restArgs] = args
-    
+
     const snowflake = userId.replace(/<@!?([0-9]+)>/, '$1')
     const reason = restArgs.join(' ')
     const user = await client.users.fetch(snowflake)
@@ -27,7 +27,7 @@ const unyeet: Command = {
 
     const reasonString = reason
       ? ` for ${reason}.`
-      : `.`
+      : '.'
 
     message.delete().catch(console.error)
 
@@ -41,9 +41,9 @@ const unyeet: Command = {
       await logChannel.send(embed({
         title: 'Unyeet',
         description: `<@${user.id}> has been unyeeted${reasonString}`,
-        
+
         footer: {
-          "icon_url": user.avatarURL(),
+          icon_url: user.avatarURL(),
           text: name,
         },
       }))
@@ -51,9 +51,9 @@ const unyeet: Command = {
       await message.channel.send(embed({
         title: 'Failed to unyeet member.',
         color: red,
-        
+
         footer: {
-          "icon_url": user.avatarURL(),
+          icon_url: user.avatarURL(),
           text: name,
         },
       }))

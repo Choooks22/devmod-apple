@@ -1,7 +1,7 @@
-import { Command } from '@types'
+import type { Command } from '@types'
 import * as fs from 'fs'
 
-import {
+import type {
   DMChannel,
   Message,
   NewsChannel,
@@ -29,17 +29,19 @@ const buildRoles: Command = {
 
       let cleanContent = msg.cleanContent.length > 0 ? msg.cleanContent : ''
 
-      cleanContent = '\n' + cleanContent.split('```')[0] + '\n```\n' + cleanContent.split('```')[1] + '\n```'
+      cleanContent = `\n${cleanContent.split('```')[0]}\n\`\`\`\n${cleanContent.split('```')[1]}\n\`\`\``
 
       let data = `**${msg.author.id}** [${created.toUTCString()}]:\n ${msg.cleanContent}`
-      msg?.embeds.length > 0 ? msg.embeds.forEach(embed => {
-        data += `\n \`\`\` 
+      msg?.embeds.length > 0
+        ? msg.embeds.forEach(embed => {
+          data += `\n \`\`\` 
 title: ${embed.title}
 description: ${embed.description}
 ${embed?.image?.proxyURL ? ` image: ${embed?.image?.proxyURL} ` : ''}
 \`\`\` 
       `
-      }) : ''
+        })
+        : ''
       attachments.length > 0 ? data += `Attachments: ${attachments.map(a => a.proxyURL).join(', ')}` : ''
 
       fs.appendFileSync(`./archives/${currentChannel.id}-${time}.md`, `${data}\n\n`)
@@ -49,12 +51,10 @@ ${embed?.image?.proxyURL ? ` image: ${embed?.image?.proxyURL} ` : ''}
       title: 'Archive',
       description: 'Archived the current channel.',
     }))
-
   },
 }
 
 const getMessages = async (channel: (TextChannel | DMChannel | NewsChannel), lastMessage: Message, pastMessages: Message[]) => {
-
   const msgs = await channel.messages.fetch({
     before: lastMessage.id,
     limit: 100,
@@ -66,7 +66,6 @@ const getMessages = async (channel: (TextChannel | DMChannel | NewsChannel), las
   pastMessages.push(...Array.from(msgs.values()))
 
   return await getMessages(channel, msgs.last(), pastMessages)
-
 }
 
 export default buildRoles

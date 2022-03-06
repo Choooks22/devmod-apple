@@ -1,4 +1,4 @@
-import { Command } from '@types'
+import type { Command } from '@types'
 import axios from 'axios'
 import { red } from '../../utils/colors'
 
@@ -7,7 +7,7 @@ const mdn: Command = {
   usage: 'mdn <query>',
   description: 'Search for an article on MDN.',
 
-  async callback ({ message, embed, args }): Promise<void> {
+  async callback({ message, embed, args }): Promise<void> {
     // If a query isn't specified send an error message and terminate the command.
     if (args.length < 1) {
       await message.channel.send(embed({

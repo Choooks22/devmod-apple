@@ -1,7 +1,7 @@
-import { Command } from '@types'
+import type { Command } from '@types'
 import config from '../../config'
 import { red } from '../../utils/colors'
-import { TextChannel } from 'discord.js'
+import type { TextChannel } from 'discord.js'
 
 const kick: Command = {
   regex: /^(kick)(\s|$)/,
@@ -9,7 +9,7 @@ const kick: Command = {
   description: 'Kicks a member.',
   permissions: ['KICK_MEMBERS'],
 
-  async callback ({
+  async callback({
     message,
     args,
     embed,
@@ -24,7 +24,7 @@ const kick: Command = {
 
     const reasonString = reason
       ? ` for ${reason}.`
-      : `.`
+      : '.'
 
     try {
       const member = await message.guild.members.fetch(snowflake)
@@ -35,7 +35,7 @@ const kick: Command = {
           color: red,
 
           footer: {
-            "icon_url": user.avatarURL(),
+            icon_url: user.avatarURL(),
             text: name,
           },
         }))
@@ -51,7 +51,7 @@ const kick: Command = {
     message.delete().catch(console.error)
 
     await user.send(embed({
-      title: `Kicked`,
+      title: 'Kicked',
       description: `You've been kicked from Devcord${reasonString}`,
     })).catch(console.error)
 
@@ -65,7 +65,7 @@ const kick: Command = {
         description: `<@${user.id}> has been kicked${reasonString}`,
 
         footer: {
-          "icon_url": user.avatarURL(),
+          icon_url: user.avatarURL(),
           text: name,
         },
       }))
@@ -75,7 +75,7 @@ const kick: Command = {
         color: red,
 
         footer: {
-          "icon_url": user.avatarURL(),
+          icon_url: user.avatarURL(),
           text: name,
         },
       }))

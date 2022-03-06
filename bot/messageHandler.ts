@@ -1,13 +1,13 @@
 import commands from '../commands'
-import { Command } from '@types'
+import type { Command } from '@types'
 
-import { 
-  devcordRed, 
-  red, 
+import {
+  devcordRed,
+  red,
 } from '../utils/colors'
 
-import { 
-  Message, 
+import type {
+  Message,
   Client,
 } from 'discord.js'
 
@@ -15,10 +15,10 @@ import config from '../config'
 
 config.prefix = config.prefix || /^\./
 
-export default ({ 
+export default ({
   client,
-}: { 
-  client: Client 
+}: {
+  client: Client
 }) => async (message: Message): Promise<void> => {
   if (message.author.bot) return
 
@@ -33,9 +33,9 @@ export default ({
   const embed = (props, messageProps?) => ({
     ...messageProps,
     embed: {
-      author: { 
-        'icon_url': message.author.avatarURL(), 
-        name : message.author.username,
+      author: {
+        icon_url: message.author.avatarURL(),
+        name: message.author.username,
       },
       // timestamp: new Date(),
       color: devcordRed,
@@ -43,12 +43,12 @@ export default ({
     },
   })
 
-  for (const { 
-    regex, 
-    callback, 
-    noPrefix, 
+  for (const {
+    regex,
+    callback,
+    noPrefix,
     usage,
-    permissions, 
+    permissions,
   } of commands as Command[]) {
     if (!noPrefix && !config.prefix.test(message.content)) return
 
@@ -71,7 +71,7 @@ export default ({
 
       if (!hasPermission) {
         await message.channel.send(embed({
-          title: `You don't have permission to use this command`,
+          title: 'You don\'t have permission to use this command',
           color: red,
           description: `\`${usage}\``,
         }))
@@ -85,7 +85,7 @@ export default ({
           contentWithCommand,
           content,
           args,
-          embed, 
+          embed,
           client,
         })
       } catch (error) {

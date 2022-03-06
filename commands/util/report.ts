@@ -1,8 +1,8 @@
-import { Command } from '@types'
+import type { Command } from '@types'
 
 import config from '../../config'
 
-import {
+import type {
   TextChannel,
 } from 'discord.js'
 
@@ -15,9 +15,9 @@ const report: Command = {
   usage: 'report <member> <reason>',
   description: 'Reports a user.',
 
-  async callback ({ 
-    message, 
-    embed, 
+  async callback({
+    message,
+    embed,
     args,
   }): Promise<void> {
     if (!config.channels?.reports) {
@@ -57,9 +57,9 @@ const report: Command = {
     await reportsChannel.send(embed({
       title: 'Report',
       description: `<@${user.id}> has been reported${reasonString}`,
-      
+
       footer: {
-        "icon_url": user.avatarURL(),
+        icon_url: user.avatarURL(),
         text: name,
       },
     }))

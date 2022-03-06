@@ -1,5 +1,6 @@
-import { Command } from '@types'
-import { TextChannel, MessageAttachment } from 'discord.js'
+import type { Command } from '@types'
+import type { TextChannel } from 'discord.js'
+import { MessageAttachment } from 'discord.js'
 const { createCanvas, loadImage } = require('canvas')
 
 const anime: Command = {
@@ -7,7 +8,7 @@ const anime: Command = {
   usage: 'anime <member> <penalty>',
   description: 'Sends an anime violation.',
 
-  async callback ({
+  async callback({
     message,
     args,
     embed,
@@ -34,18 +35,18 @@ const anime: Command = {
     canvasCtx.font = '32px Verdana'
 
     try {
-        const image = await loadImage('anime.png')
+      const image = await loadImage('anime.png')
 
-        canvasCtx.drawImage(image, 0, 0, 1088, 631)
-        canvasCtx.fillText(date, 130, 430)
-        canvasCtx.fillText(`#${channelName}`, 150, 470)
-        canvasCtx.fillText(issuedTo.username, 230, 515)
-        canvasCtx.fillText(issuedBy.username, 230, 560)
-        canvasCtx.fillText(penalty, 190, 600)
+      canvasCtx.drawImage(image, 0, 0, 1088, 631)
+      canvasCtx.fillText(date, 130, 430)
+      canvasCtx.fillText(`#${channelName}`, 150, 470)
+      canvasCtx.fillText(issuedTo.username, 230, 515)
+      canvasCtx.fillText(issuedBy.username, 230, 560)
+      canvasCtx.fillText(penalty, 190, 600)
 
-        const attachment = new MessageAttachment(canvas.toBuffer(), 'attachment.png')
+      const attachment = new MessageAttachment(canvas.toBuffer(), 'attachment.png')
 
-        await message.channel.send(attachment)
+      await message.channel.send(attachment)
     } catch (error) {
       message.react('❌')
       console.log(error)

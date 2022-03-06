@@ -1,4 +1,4 @@
-import { Command } from '@types'
+import type { Command } from '@types'
 import { red } from '../../utils/colors'
 
 const lmgtfy: Command = {
@@ -6,7 +6,7 @@ const lmgtfy: Command = {
   usage: 'lmgtfy <query>',
   description: 'Post a LMGTFY link.',
 
-  async callback ({ message, embed, args }): Promise<void> {
+  async callback({ message, embed, args }): Promise<void> {
     // Set up type and site options.
     const types = {
       '-w': 'w', // web
@@ -29,7 +29,7 @@ const lmgtfy: Command = {
     if (args.length < 1) {
       await message.channel.send(embed({
         title: 'Please specify a query.',
-        color: red,          
+        color: red,
       }))
 
       return
@@ -55,7 +55,7 @@ const lmgtfy: Command = {
     }
 
     await message.delete()
-    
+
     // Send a let me google that for you link in an embedded message.
     // noinspection JSUnresolvedFunction,JSCheckFunctionSignatures
     await message.channel.send(embed({
