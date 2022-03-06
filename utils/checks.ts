@@ -10,7 +10,7 @@ export async function checkPerms(ctx: Context, perms: PermissionString[]): Promi
     throw new TypeError('Could not access member permissions. Please check your intents.')
   }
 
-  const missing = ctx.interaction.memberPermissions.missing(perms)
+  const missing = ctx.interaction.memberPermissions.missing(perms, true)
   const isMissing = missing.length > 0
 
   if (isMissing) {
