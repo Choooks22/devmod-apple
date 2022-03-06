@@ -1,5 +1,7 @@
+import { createCanvas, loadImage } from 'canvas'
 import { defineSlashSubcommand, defineSubcommand } from 'chooksie'
-import { MessageEmbed } from 'discord.js'
+import type { TextBasedChannel } from 'discord.js'
+import { MessageAttachment, MessageEmbed, TextChannel } from 'discord.js'
 
 const lmgtfy = defineSubcommand({
   name: 'lmgtfy',
@@ -79,6 +81,69 @@ const lmgtfy = defineSubcommand({
   ],
 })
 
+const noAnime = defineSubcommand({
+  name: 'no-anime',
+  description: 'Issue an anime violation.',
+  type: 'SUB_COMMAND',
+  async setup() {
+    const image = await loadImage('anime.png')
+
+    const getChannelName = (channel: TextBasedChannel | null) => {
+      if (!channel) return 'Invalid Channel.'
+      return channel instanceof TextChannel
+        ? channel.name.replace(/[^\w]/g, '')
+        : channel.id
+    }
+
+    const formatDate = (date: Date) => date.toLocaleString('en-US', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+    })
+
+    return { image, getChannelName, formatDate }
+  },
+  async execute({ interaction }) {
+    const issuedBy = interaction.user
+    const issuedTo = interaction.options.getUser('user', true)
+    const penalty = interaction.options.getString('penalty', true)
+    await interaction.deferReply()
+
+    const canvas = createCanvas(1088, 631)
+    const canvasCtx = canvas.getContext('2d')
+    canvasCtx.font = '32px Verdana'
+
+    const channelName = `#${this.getChannelName(interaction.channel)}`
+    const date = this.formatDate(new Date())
+
+    canvasCtx.drawImage(this.image, 0, 0, 1088, 631)
+    canvasCtx.fillText(date, 130, 430)
+    canvasCtx.fillText(channelName, 150, 470)
+    canvasCtx.fillText(issuedTo.username, 230, 515)
+    canvasCtx.fillText(issuedBy.username, 230, 560)
+    canvasCtx.fillText(penalty, 190, 600)
+
+    const attachment = new MessageAttachment(canvas.toBuffer(), 'attachment.png')
+    await interaction.editReply({ attachments: [attachment] })
+  },
+  options: [
+    {
+      name: 'user',
+      description: 'User to issue violation to.',
+      type: 'USER',
+      required: true,
+    },
+    {
+      name: 'penalty',
+      description: 'The penalty of the violation.',
+      type: 'STRING',
+      required: true,
+    },
+  ],
+})
+
 const yeet = defineSubcommand({
   name: 'yeet',
   description: 'Yeet.',
@@ -109,6 +174,7 @@ export default defineSlashSubcommand({
   description: 'Bunch of memes.',
   options: [
     lmgtfy,
+    noAnime,
     yeet,
   ],
 })
