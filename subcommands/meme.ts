@@ -79,10 +79,36 @@ const lmgtfy = defineSubcommand({
   ],
 })
 
+const yeet = defineSubcommand({
+  name: 'yeet',
+  description: 'Yeet.',
+  type: 'SUB_COMMAND',
+  async setup() {
+    const { default: randomize } = await import('../utils/randomize')
+    const getId = randomize([
+      'J1ABRhlfvQNwIOiAas',
+      'YnBthdanxDqhB99BGU',
+      'M9aM4NXS8q29W6Ia6S',
+      '11HkufsiNrBXK8',
+      '5PhDdJQd2yG1MvHzJ6',
+      'Izi543BvWEbAVXZLG6',
+      '4EEIsDmNJCiNcvAERef',
+      'KzoZUrq40MaazLgHsg',
+      'DvMHwFYLVHlZe',
+    ])
+
+    return () => `https://media.giphy.com/media/${getId()}/giphy.gif`
+  },
+  async execute({ interaction }) {
+    await interaction.reply(this())
+  },
+})
+
 export default defineSlashSubcommand({
   name: 'meme',
   description: 'Bunch of memes.',
   options: [
     lmgtfy,
+    yeet,
   ],
 })
