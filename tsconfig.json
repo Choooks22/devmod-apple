@@ -1,24 +1,22 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "CommonJS",
     "lib": [
-      "ESNext",
-      "DOM"
+      "ESNext"
     ],
-    "target": "ES6",
-    "baseUrl": ".",
-    "paths": {
-      "@types/*": [
-        "@types/*"
-      ]
-    },
-    "types": [
-      "node"
-    ]
+    "target": "ES2022",
+    "noEmit": true,
+    "strict": true,
+    "esModuleInterop": true
   },
   "include": [
-    "./commands/**/*.ts",
-    "./bot/**/*.ts",
-    "./@types.ts"
+    "*/**/*.ts",
+    "chooks.config.ts",
+    "env.d.ts"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules",
+    ".chooks"
   ]
 }

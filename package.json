@@ -1,27 +1,25 @@
 {
   "name": "devmod",
-  "main": "bot/index.js",
+  "private": true,
   "scripts": {
-    "start": "ts-node bot",
-    "dev": "ts-node-dev bot",
-    "dev-nodemon": "concurrently -k -p \"[{name}]\" -n \"TypeScript, Node\" -c \"yello.bold, cyan.bold\" \"tsc -w\" \"nodemon bot/index.js\"",
+    "dev": "chooks",
+    "start": "node dist",
+    "build": "chooks build",
+    "register": "chooks register",
     "lint": "eslint --fix --ext .ts @types bot commands"
   },
   "dependencies": {
-    "axios": "^0.20.0",
-    "canvas": "^2.8.0",
-    "discord.js": "^12.3.1",
-    "ts-node": "^9.0.0",
-    "typescript": "^4.0.2"
+    "@chookslint/eslint-config-typescript": "^2.2.1",
+    "canvas": "^2.9.0",
+    "chooksie": "^2.0.0-rc.5",
+    "discord.js": "^13.6.0"
   },
   "devDependencies": {
-    "@types/node": "^14.6.4",
-    "@typescript-eslint/eslint-plugin": "^4.0.1",
-    "@typescript-eslint/parser": "^4.0.1",
-    "babel-eslint": "^10.1.0",
-    "concurrently": "^5.3.0",
-    "eslint": "^7.8.1",
-    "nodemon": "^2.0.4",
-    "ts-node-dev": "^1.0.0-pre.62"
+    "@chookscord/cli": "^2.0.0-rc.10",
+    "@types/node": "^16.11.26",
+    "@typescript-eslint/eslint-plugin": "^5.13.0",
+    "@typescript-eslint/parser": "^5.13.0",
+    "eslint": "^8.10.0",
+    "typescript": "^4.6.2"
   }
 }

@@ -1,18 +1,23 @@
 # devmod-apple
+
 ## prerequisites
-- node.js 12+
+
+- node.js 16.9+
 
 ## installation
-```
+
+```sh
 git clone https://github.com/devcord/devmod-apple
 cd devmod-apple
 npm install
 ```
 
 ## scripts
-```bash
-npm run start # run bot in production mode
-npm run dev # run bot in development mode using ts-node
-npm run dev-nodemon # run bot in development mode using tsc and nodemon
+
+```sh
+npm start # run bot in production mode
+npm run dev # run bot in development mode
+npm run build # create a production build of the bot
+npm run register # register slash commands globally
 npm run lint # lint and fix
 ```

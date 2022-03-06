@@ -1,0 +1,6 @@
+root: true
+extends:
+  - "@chookslint/typescript/strict"
+  - "@chookslint/typescript/types"
+parserOptions:
+  project: ./tsconfig.json
