@@ -1,15 +1,32 @@
-import type { Command } from '@types'
+import { defineSlashCommand } from 'chooksie'
 
-const ping: Command = {
-  regex: /^ping$/,
-  usage: 'ping',
-  description: 'Ping the bot.',
+export default defineSlashCommand({
+  name: 'ping',
+  description: 'Ping one of the help roles. You may only ping once per hour, and twice daily.',
+  async execute({ interaction }) {
+    // @todo: Ping limits
+    const user = interaction.user
+    const helper = interaction.options.getString('role', true)
 
-  async callback({ message, embed }): Promise<void> {
-    await message.channel.send(embed({
-      title: 'Pong!',
-    }))
+    // @todo: Roles config.
+    await interaction.reply({
+      content: `${user} requested help from ${helper}`,
+      allowedMentions: {
+        repliedUser: false,
+        // @todo: Put mentioned role here.
+        roles: [],
+      },
+    })
   },
-}
-
-export default ping
+  options: [
+    {
+      name: 'role',
+      description: 'The helper role to ping.',
+      type: 'STRING',
+      required: true,
+      // @todo: Add roles.
+      // Either: Use choices (upto 25, instant) OR
+      //         Use autocomplete (unlimited, slow)
+    },
+  ],
+})
